@@ -1,0 +1,12 @@
+# Secrets — never commit these
+.mcp.json
+.env
+*.token
+*_token*
+sk_user_*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
