@@ -349,7 +349,10 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- compact position strip on the homepage ----------------------- */
 
-.posstrip { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 14px; }
+.posstrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+/* six items: three across reads as two clean rows, never a 5 + 1 orphan */
+@media (max-width: 900px) { .posstrip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .posstrip { grid-template-columns: 1fr; } }
 .poschip {
   border: 1px solid rgba(250,250,247,.14);
   border-radius: 14px; padding: 18px 17px;
