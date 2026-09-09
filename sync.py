@@ -28,30 +28,37 @@ def screen(src, n):
     return src[i:j]
 
 def strip(html):
-    # drop the map surfaces: the site does not load Leaflet, and a dead map
-    # region reads worse than no map at all
+    """Turn a live app screen into inert decoration."""
+    # drop map surfaces: the site does not load Leaflet, and a dead map region
+    # reads worse than no map at all
     while '<div class="mapwrap' in html:
-        a, b = block(html, html[html.index('<div class="mapwrap'):].split('>')[0] + '>')
-        s = html.index('<div class="mapwrap')
-        _, e = block(html[s:], html[s:].split('>')[0] + '>')
-        html = html[:s] + html[s + e:]
-    html = re.sub(r'\s*<div class="gorow">.*?</div>\s*</div>', '', html, flags=re.S)
+        i = html.index('<div class="mapwrap')
+        open_tag = html[i:html.index('>', i) + 1]
+        a, b = block(html[i:], open_tag)
+        html = html[:i] + html[i + b:]
+
+    # copy that only makes sense next to a map
+    html = re.sub(r'\s*<div class="gorow">.*?</a>\s*</div>', '', html, flags=re.S)
     html = re.sub(r'\s*<p class="pickhint">.*?</p>', '', html, flags=re.S)
 
-    # every hook that routing or state depends on
-    for a in ['data-goto', 'data-confirm', 'data-confirmed', 'data-level-chip',
-              'data-verdict-level', 'data-verdict-note', 'data-view', 'data-view-panel',
-              'data-map', 'data-venue', 'data-pick-coords', 'data-screen']:
-        html = re.sub(r'\s%s(="[^"]*")?' % a, '', html)
+    # Every hook routing or state depends on. Longest first, and the negative
+    # lookahead stops `data-view` from eating the front of `data-view-panel`
+    # and leaving `-panel="list"` behind as a stray attribute.
+    for a in ['data-view-panel', 'data-verdict-level', 'data-verdict-note',
+              'data-level-chip', 'data-confirmed', 'data-confirm', 'data-screen',
+              'data-venue', 'data-pick-coords', 'data-view', 'data-goto', 'data-map']:
+        html = re.sub(r'\s%s(?![-\w])(="[^"]*")?' % a, '', html)
 
-    # decoration must not be focusable or appear in the heading outline
+    # `hidden` is not always the last attribute, so match it as a whole token
+    html = re.sub(r'\shidden(?=[\s>])', '', html)
+
+    # decoration must not be focusable, nor appear in the heading outline
     html = html.replace('<button ', '<button tabindex="-1" ')
-    html = re.sub(r'<h3 class="([^"]*)"', r'<p class="\1"', html)
-    html = re.sub(r'<h4 class="([^"]*)"', r'<p class="\1"', html)
-    html = html.replace('</h3>', '</p>').replace('</h4>', '</p>')
-    html = html.replace(' hidden>', '>')
+    html = re.sub(r'<(h3|h4) class="([^"]*)"', r'<p class="\2"', html)
+    html = re.sub(r'</h[34]>', '</p>', html)
     html = html.replace('class="app ', 'class="app is-active ')
     return html
+
 
 app = open('app.html').read()
 idx = open('index.html').read()
