@@ -21,7 +21,10 @@
     '3': 'Game detail',
     '4': 'Host a game'
   };
-  var PARENT = { '1': '2', '3': '2', '4': '2' };
+  /* Only the detail screen is pushed on top of something. Screens 1, 2 and 4
+     are tab roots, so they get the wordmark or a plain title, never a back
+     arrow — a back arrow on a tab root has nowhere honest to go. */
+  var PARENT = { '3': '2' };
   var WORDMARK = titleEl ? titleEl.innerHTML : '';
 
   var current = '2';
@@ -48,8 +51,11 @@
     }
     if (backBtn) { backBtn.hidden = !PARENT[id]; }
 
+    // the detail screen still belongs to the Games tab, so keep it lit
+    var navId = PARENT[id] || id;
+
     navs.forEach(function (b) {
-      var on = b.dataset.nav === id;
+      var on = b.dataset.nav === navId;
       b.classList.toggle('is-on', on);
       if (on) { b.setAttribute('aria-current', 'page'); }
       else { b.removeAttribute('aria-current'); }
