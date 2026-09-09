@@ -26,7 +26,24 @@ unsolved part is the on-ramp, and that is what this prototype is about.
 | Getting picked last | Hosts assign teams, and the interface says so up front |
 | Hosts have no reason to be welcoming | "Welcome first-timers" is a toggle with a stated commitment attached |
 
+## Two interfaces
+
+The project ships as two separate, publishable UIs plus the original case study.
+
+| Page | What it is |
+| --- | --- |
+| `index.html` | **The website.** Fixed nav, hero, the barrier laid out as problem/answer pairs, a four-step walkthrough, six signal cards, a host section, closing CTA. |
+| `app.html` | **The app.** The four screens in a real app shell — sticky app bar with a contextual title and back, bottom tab bar, full-viewport on a phone and a 420px frame on desktop. |
+| `prototype.html` | The original case-study page: the clickable phone plus the four-screen gallery. |
+
+The app's screens live in one place. `app.html` carries them, and the two
+showcase phones on the website are generated from the same markup with the
+routing hooks stripped and every control made unfocusable, so the marketing
+copies cannot drift from the real thing.
+
 ## Screens
+
+
 
 1. **Find your level** — three plain-language questions resolve into a level.
 2. **Games near you** — filtered feed where every card carries beginner signals.
@@ -51,10 +68,19 @@ screen, so the screenshots and the working app can never drift apart.
 No build step, no dependencies.
 
 ```
-git clone https://github.com/<your-username>/bump.git
+git clone https://github.com/cloudietuan/bump.git
 cd bump
-open index.html
+open index.html     # the website
+open app.html       # the app
+open prototype.html # the case study
 ```
+
+Live at <https://cloudietuan.github.io/bump/>.
+
+Assets are referenced with a `?v=` query string because GitHub Pages serves
+them with `cache-control: max-age=600`. **Bump that number when you change
+`styles.css`, `app.js`, `site.*` or `app-ui.*`,** or a deploy will look like it
+silently failed for ten minutes.
 
 ## Design notes
 
@@ -77,9 +103,18 @@ than decoration.
 ## Files
 
 ```
-index.html    markup for all four screens
-styles.css    design tokens and component styles
-app.js        screen routing, state, gallery cloning
+index.html     the website
+site.css       website layout and components
+site.js        sticky nav, reveal on scroll
+
+app.html       the app
+app-ui.css     app shell: app bar, screens, bottom nav
+app-ui.js      routing, screen state, controls
+
+prototype.html the original case-study page
+app.js         prototype routing and gallery cloning
+
+styles.css     design tokens and the shared screen components
 ```
 
 Built as a mini-project on making a hobby more accessible.
