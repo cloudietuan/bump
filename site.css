@@ -251,7 +251,10 @@ body.sitebody { padding-top: 62px; }
    Positions
    ========================================================================== */
 
-.poshero { padding: clamp(40px, 5vw, 70px) 0 20px; }
+/* .poshero shares its element with .wrap and is declared later, so it must
+   restate the gutter or its shorthand zeroes it and the heading sits flush
+   against the window edge. */
+.poshero { padding: clamp(40px, 5vw, 70px) var(--gutter) 20px; }
 .poshero h1 {
   font-family: 'Barlow Condensed', Inter, sans-serif;
   font-weight: 600; font-size: clamp(38px, 5vw, 60px); line-height: 1.02;
