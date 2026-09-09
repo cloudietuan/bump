@@ -10,18 +10,25 @@
 
   /* ---------- screen routing ---------- */
 
+  var current = '1';
+
   function show(id) {
+    // going deeper enters from the right, coming back from the left
+    var back = Number(id) < Number(current);
+    current = id;
+
     screens.forEach(function (s) {
       var on = s.dataset.screen === id;
       s.hidden = !on;
       s.classList.toggle('is-active', on);
       if (on) {
         // restart the entrance so the transition reads on every visit
-        s.classList.remove('enters');
+        s.classList.remove('enters', 'enters--fwd', 'enters--back');
         void s.offsetWidth;
-        s.classList.add('enters');
+        s.classList.add('enters', back ? 'enters--back' : 'enters--fwd');
       }
     });
+    moveIndicator();
     jumps.forEach(function (b) { b.classList.toggle('is-on', b.dataset.goto === id); });
   }
 
@@ -113,5 +120,59 @@
     shot.insertBefore(frame, shot.firstChild);
   });
 
+  /* ---------- jump nav: one pill that slides ---------- */
+
+  var jumpBar = document.querySelector('.jump');
+  var indicator = null;
+
+  if (jumpBar && jumps.length) {
+    indicator = document.createElement('span');
+    indicator.className = 'jump__ind';
+    indicator.setAttribute('aria-hidden', 'true');
+    jumpBar.insertBefore(indicator, jumpBar.firstChild);
+  }
+
+  function moveIndicator() {
+    if (!indicator) { return; }
+    var on = jumps.filter(function (b) { return b.classList.contains('is-on'); })[0];
+    if (!on) { return; }
+    indicator.style.width = on.offsetWidth + 'px';
+    indicator.style.transform = 'translate3d(' + on.offsetLeft + 'px,' + on.offsetTop + 'px,0)';
+  }
+
+  // the pill must not animate into place from 0 on first paint
+  function placeIndicator() {
+    if (!indicator) { return; }
+    var keep = indicator.style.transition;
+    indicator.style.transition = 'none';
+    moveIndicator();
+    void indicator.offsetWidth;
+    indicator.style.transition = keep;
+  }
+
+  window.addEventListener('resize', placeIndicator);
+
+  /* ---------- reveal on scroll ---------- */
+  /* Applied from JS so that with scripting off every section stays visible. */
+
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if ('IntersectionObserver' in window && !calm.matches) {
+    var targets = document.querySelectorAll('.lab__intro, .stage__intro, .shot, .colophon');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+    targets.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+  }
+
   show('1');
+  placeIndicator();
+  // fonts land late and change button widths, so re-measure once they do
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(placeIndicator); }
 })();
