@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5">
-<link rel="stylesheet" href="app-ui.css?v=5">
+<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="app-ui.css?v=6">
 </head>
 <body class="appbody">
 
@@ -227,6 +227,80 @@
     <button class="btn btn--ghost">Copy invite link</button>
   </div>
 </section>
+
+        <!-- ---------- 5. positions ---------- -->
+        <section class="app app--positions" data-screen="5" hidden aria-label="Positions">
+          <h3 class="prompt" style="margin-top:6px;">Six positions, plainly.</h3>
+          <p class="posintro">
+            You don't have to pick one. Hosts put people where the team is short,
+            and “I'll go wherever” is a normal answer.
+          </p>
+
+          <div class="poslist-app">
+            <div class="positem">
+              <span class="positem__abbr">OH</span>
+              <span>
+                <span class="positem__name">Outside hitter</span>
+                <span class="positem__what">Hits from the left and passes serve.</span>
+                <span class="positem__new">New? A good first hitting spot.</span>
+              </span>
+            </div>
+            <div class="positem">
+              <span class="positem__abbr">OPP</span>
+              <span>
+                <span class="positem__name">Opposite</span>
+                <span class="positem__what">Hits from the right, blocks their best hitter.</span>
+                <span class="positem__new">New? Less passing pressure than outside, but you hit from your off-hand side, which takes a while to feel normal.</span>
+              </span>
+            </div>
+            <div class="positem">
+              <span class="positem__abbr">MB</span>
+              <span>
+                <span class="positem__name">Middle blocker</span>
+                <span class="positem__what">Blocks everywhere, hits quick sets.</span>
+                <span class="positem__new">New? The hardest spot to start in.</span>
+              </span>
+            </div>
+            <div class="positem">
+              <span class="positem__abbr">S</span>
+              <span>
+                <span class="positem__name">Setter</span>
+                <span class="positem__what">Takes the second ball and decides who hits.</span>
+                <span class="positem__new">New? The highest-responsibility spot on the court.</span>
+              </span>
+            </div>
+            <div class="positem">
+              <span class="positem__abbr positem__abbr--quiet">L</span>
+              <span>
+                <span class="positem__name">Libero</span>
+                <span class="positem__what">Back-row defender in a different jersey.</span>
+                <span class="positem__new">New? Uncommon in pickup.</span>
+              </span>
+            </div>
+            <div class="positem">
+              <span class="positem__abbr positem__abbr--quiet">DS</span>
+              <span>
+                <span class="positem__name">Defensive specialist</span>
+                <span class="positem__what">Back-row defender using a normal sub.</span>
+                <span class="positem__new">New? A very common way to get court time while you're still learning to hit.</span>
+              </span>
+            </div>
+          </div>
+
+          <h4 class="sub">The numbers aren't positions</h4>
+          <div class="court" role="img" aria-label="The six court zones, four three and two in front, five six and one behind">
+            <div class="court__half">
+              <span class="zone num">4</span><span class="zone num">3</span><span class="zone num">2</span>
+              <span class="zone num">5</span><span class="zone num">6</span><span class="zone zone--on num">1</span>
+            </div>
+            <div class="court__net"></div>
+          </div>
+          <p class="posfoot">
+            Zones 1 to 6 are places on the floor. Everyone shifts one spot clockwise
+            when their team wins the serve back, and zone 1 serves. So “middle back”
+            is a place, and “middle blocker” is a job.
+          </p>
+        </section>
   </main>
 
   <nav class="navbar" aria-label="Main">
@@ -238,6 +312,10 @@
       <span class="navbtn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>
       Host
     </button>
+    <button class="navbtn" data-nav="5">
+      <span class="navbtn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M12 4.5v15M3 12h18"/></svg></span>
+      Positions
+    </button>
     <button class="navbtn" data-nav="1">
       <span class="navbtn__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.6"/><path d="M4.8 20c1.2-3.6 4-5.4 7.2-5.4s6 1.8 7.2 5.4"/></svg></span>
       You
@@ -246,6 +324,6 @@
 
 </div>
 
-<script src="app-ui.js?v=5"></script>
+<script src="app-ui.js?v=6"></script>
 </body>
 </html>

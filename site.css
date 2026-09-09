@@ -245,3 +245,125 @@ body.sitebody { padding-top: 62px; }
 @media (max-width: 420px) {
   .showcase, .hero__device .phone, .split__device .phone { width: 100%; }
 }
+
+/* ==========================================================================
+   Positions
+   ========================================================================== */
+
+.poshero { padding: 66px 0 20px; }
+.poshero h1 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: clamp(38px, 5vw, 60px); line-height: 1.02;
+  margin: 0 0 18px; max-width: 17ch; text-wrap: balance;
+}
+.poshero p {
+  margin: 0; max-width: 56ch; font-size: 17px; line-height: 1.6;
+  color: rgba(250,250,247,.74); text-wrap: pretty;
+}
+
+/* ---------- the rotation diagram ---------------------------------------- */
+
+.rot {
+  display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: 52px; align-items: center;
+}
+@media (max-width: 860px) { .rot { grid-template-columns: 1fr; gap: 32px; } }
+
+.rotcourt {
+  border: 1.5px solid rgba(250,250,247,.28);
+  border-radius: 10px; padding: 12px;
+  background: rgba(29,79,126,.18);
+}
+.rotcourt__net {
+  height: 4px; border-radius: 2px; margin: 0 0 12px;
+  background: repeating-linear-gradient(90deg, rgba(250,250,247,.55) 0 5px, transparent 5px 10px);
+}
+.rotcourt__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.rotzone {
+  border: 1px solid rgba(250,250,247,.2);
+  border-radius: 8px; padding: 12px 8px 11px;
+  text-align: center; min-height: 84px;
+  display: grid; align-content: center; gap: 4px;
+  transition: border-color var(--fast) ease-out, background-color var(--fast) ease-out;
+}
+.rotzone__n {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 21px; font-weight: 700; color: var(--ball);
+  font-variant-numeric: tabular-nums; line-height: 1;
+}
+.rotzone__l { font-size: 11.5px; color: rgba(250,250,247,.62); line-height: 1.3; }
+.rotzone--front { background: rgba(250,250,247,.045); }
+.rotcourt__row {
+  font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+  color: rgba(250,250,247,.42); margin: 12px 0 4px; text-align: center;
+}
+
+.rotnote h2 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: clamp(26px, 3vw, 34px); line-height: 1.08;
+  margin: 0 0 14px; text-wrap: balance;
+}
+.rotnote p { margin: 0 0 14px; font-size: 15.5px; line-height: 1.62; color: rgba(250,250,247,.72); text-wrap: pretty; }
+.rotnote p:last-child { margin-bottom: 0; }
+.rotnote b { color: var(--tape); font-weight: 600; }
+
+/* ---------- position cards ----------------------------------------------- */
+
+.poslist { display: grid; gap: 18px; }
+
+.poscard {
+  border: 1px solid rgba(250,250,247,.14);
+  border-radius: 16px; padding: 26px 24px;
+  display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 28px;
+  align-items: start;
+  transition: border-color var(--fast) ease-out, background-color var(--fast) ease-out;
+}
+@media (hover: hover) { .poscard:hover { border-color: rgba(250,250,247,.3); background: rgba(250,250,247,.028); } }
+@media (max-width: 700px) { .poscard { grid-template-columns: 1fr; gap: 14px; } }
+
+.poscard__badge {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 30px; font-weight: 700; line-height: 1;
+  color: var(--court-deep); background: var(--ball);
+  border-radius: 12px; padding: 14px 0; text-align: center;
+}
+.poscard__badge--quiet { background: rgba(250,250,247,.12); color: var(--tape); }
+
+.poscard h3 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: 26px; line-height: 1.1; margin: 0 0 3px;
+}
+.poscard__alias { margin: 0 0 14px; font-size: 13px; color: rgba(250,250,247,.5); }
+.poscard__lead { margin: 0 0 16px; font-size: 15.5px; line-height: 1.62; color: rgba(250,250,247,.76); text-wrap: pretty; }
+
+.posrows { display: grid; gap: 9px; margin: 0; }
+.posrow { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 14px; align-items: baseline; }
+@media (max-width: 560px) { .posrow { grid-template-columns: 1fr; gap: 2px; } }
+.posrow dt {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 15px; color: var(--ball);
+}
+.posrow dd { margin: 0; font-size: 14.5px; line-height: 1.55; color: rgba(250,250,247,.68); }
+
+.posrow--new dt { color: var(--grow-l, #7FD3AE); }
+
+/* ---------- compact position strip on the homepage ----------------------- */
+
+.posstrip { display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 14px; }
+.poschip {
+  border: 1px solid rgba(250,250,247,.14);
+  border-radius: 14px; padding: 18px 17px;
+  display: grid; gap: 6px; align-content: start;
+  text-decoration: none; color: inherit;
+  transition: border-color var(--fast) ease-out, background-color var(--fast) ease-out, transform var(--fast) ease-out;
+}
+@media (hover: hover) { .poschip:hover { border-color: rgba(250,250,247,.32); background: rgba(250,250,247,.032); } }
+.poschip__abbr {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--ball); letter-spacing: .04em;
+}
+.poschip__name {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 20px; font-weight: 600; line-height: 1.15;
+}
+.poschip__what { font-size: 13.5px; line-height: 1.5; color: rgba(250,250,247,.64); }

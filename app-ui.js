@@ -19,7 +19,8 @@
     '1': 'Find your level',
     '2': null,            // null keeps the wordmark
     '3': 'Game detail',
-    '4': 'Host a game'
+    '4': 'Host a game',
+    '5': 'Positions'
   };
   /* Only the detail screen is pushed on top of something. Screens 1, 2 and 4
      are tab roots, so they get the wordmark or a plain title, never a back

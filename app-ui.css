@@ -154,3 +154,35 @@ body.appbody {
 @media (prefers-reduced-motion: reduce) {
   .shell .app.enters > * { animation: none !important; }
 }
+
+/* ---------- positions screen --------------------------------------------- */
+
+.poslist-app { display: grid; gap: 9px; margin-bottom: 4px; }
+
+.positem {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 12px;
+  border-radius: var(--r-card); padding: 12px 13px;
+  box-shadow: inset 0 0 0 1.5px var(--hair);
+  align-items: start;
+}
+.positem__abbr {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: .03em;
+  background: var(--court); color: var(--tape);
+  border-radius: 8px; min-height: 40px;
+  display: grid; place-items: center;
+}
+.positem__abbr--quiet { background: var(--hair); color: var(--ink); }
+.positem__name { display: block; font-size: 14.5px; font-weight: 600; }
+.positem__what { display: block; font-size: 12.5px; color: var(--mute); line-height: 1.45; margin-top: 2px; }
+.positem__new { display: block; font-size: 12.5px; color: var(--grow); font-weight: 500; line-height: 1.45; margin-top: 6px; }
+
+.posintro { margin: 0 0 14px; font-size: 13.5px; color: var(--mute); line-height: 1.5; }
+.posfoot {
+  margin: 16px 0 0; font-size: 12.5px; color: var(--mute); line-height: 1.5;
+  padding-top: 14px; border-top: 1px solid var(--hair);
+}
+
+/* the bottom bar now carries four destinations */
+.navbar { grid-template-columns: repeat(4, 1fr); }
+.navbtn { font-size: 10.5px; }
