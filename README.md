@@ -25,15 +25,17 @@ unsolved part is the on-ramp, and that is what this prototype is about.
 | Walking into an unfamiliar gym alone is the real fear | Each game shows a minute-by-minute schedule of what happens when you arrive |
 | Getting picked last | Hosts assign teams, and the interface says so up front |
 | Hosts have no reason to be welcoming | "Welcome first-timers" is a toggle with a stated commitment attached |
+| "We need an oppo" assumes you know the positions | Every position is decoded, including which ones are worth trying first |
 
-## Two interfaces
+## The pages
 
-The project ships as two separate, publishable UIs plus the original case study.
+Two publishable UIs, a reference guide, and the original case study.
 
 | Page | What it is |
 | --- | --- |
 | `index.html` | **The website.** Fixed nav, hero, the barrier laid out as problem/answer pairs, a four-step walkthrough, six signal cards, a host section, closing CTA. |
 | `app.html` | **The app.** The four screens in a real app shell — sticky app bar with a contextual title and back, bottom tab bar, full-viewport on a phone and a 420px frame on desktop. |
+| `positions.html` | **The positions guide.** Outside, opposite, middle, setter, libero and defensive specialist, each in plain language, opening with the rotation diagram. |
 | `prototype.html` | The original case-study page: the clickable phone plus the four-screen gallery. |
 
 The app's screens live in one place. `app.html` carries them, and the two
@@ -41,9 +43,15 @@ showcase phones on the website are generated from the same markup with the
 routing hooks stripped and every control made unfocusable, so the marketing
 copies cannot drift from the real thing.
 
+Position copy works the same way. It lives in `positions.py` and is rendered
+into three places — the full guide, the homepage strip, and the in-app list —
+by `gen.py`, so the three cannot disagree about what a libero may do. Edit the
+data, run `python3 gen.py`, and re-run the homepage/app injection if the strip
+or the app list changed.
+
 ## Screens
 
-
+The four app screens, in order:
 
 1. **Find your level** — three plain-language questions resolve into a level.
 2. **Games near you** — filtered feed where every card carries beginner signals.
@@ -104,8 +112,12 @@ than decoration.
 
 ```
 index.html     the website
+positions.html the positions guide
 site.css       website layout and components
 site.js        sticky nav, reveal on scroll
+
+positions.py   position copy, single source
+gen.py         regenerates positions.html from it
 
 app.html       the app
 app-ui.css     app shell: app bar, screens, bottom nav
