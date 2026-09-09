@@ -201,5 +201,19 @@
      sitting above a second identical control. */
   document.querySelectorAll('.screens .tabs').forEach(function (t) { t.remove(); });
 
-  show('2');
+  /* ---------- deep links ---------- */
+  /* ?screen=3 opens a screen directly and ?view=map opens the feed on the map.
+     Useful for linking someone straight to a game, and for capturing a single
+     screen without having to click through to it. */
+
+  var params = new URLSearchParams(window.location.search);
+  var wanted = params.get('screen');
+  var wantView = params.get('view');
+
+  show(TITLES.hasOwnProperty(wanted) ? wanted : '2');
+
+  if (wantView === 'map') {
+    var mapBtn = viewBtns.filter(function (b) { return b.dataset.view === 'map'; })[0];
+    if (mapBtn) { mapBtn.click(); }
+  }
 })();
