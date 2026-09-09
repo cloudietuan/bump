@@ -388,7 +388,10 @@ body.sitebody { padding-top: 62px; }
 }
 .hero__mark svg { width: 100%; height: 100%; display: block; }
 @keyframes slowspin { to { transform: rotate(360deg); } }
-.hero > * { position: relative; z-index: 1; }
+/* the watermark must stay out of flow: `.hero > *` has the same specificity as
+   `.hero__mark` and is declared later, so without the :not() it would win and
+   turn the mark into a grid item, pushing the hero copy out of column one */
+.hero > *:not(.hero__mark) { position: relative; z-index: 1; }
 @media (max-width: 900px) { .hero__mark { width: 400px; height: 400px; right: -140px; top: -60px; } }
 @media (prefers-reduced-motion: reduce) { .hero__mark { animation: none; } }
 
