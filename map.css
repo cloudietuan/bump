@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Bump — maps.
+
+   Leaflet supplies pan/zoom and tiles; everything visible is restyled to the
+   project's palette. Markers are div icons rather than Leaflet's default PNGs,
+   so there are no image requests to break and the pins match the design.
+
+   Every map has a static fallback underneath it. If Leaflet or the tile server
+   fails, the address and the directions link are still there — a map that
+   fails should degrade to an address, not to an empty grey box.
+   ========================================================================== */
+
+.mapwrap {
+  position: relative;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--court-deep);
+  box-shadow: inset 0 0 0 1.5px var(--hair);
+}
+.mapwrap--tall { height: 320px; }
+.mapwrap--mini { height: 150px; }
+.mapwrap--pick { height: 240px; }
+
+.leaflet-container {
+  width: 100%; height: 100%;
+  background: #0F2942;
+  font: inherit;
+  outline: none;
+}
+
+/* ---------- fallback shown until (or unless) a map loads ------------------ */
+
+.mapfall {
+  position: absolute; inset: 0; z-index: 1;
+  display: grid; align-content: center; gap: 7px;
+  padding: 18px 20px;
+  background: var(--court-deep); color: var(--tape);
+}
+.mapfall__name { font-family: 'Barlow Condensed', Inter, sans-serif; font-size: 19px; font-weight: 600; }
+.mapfall__addr { font-size: 13px; color: rgba(250,250,247,.66); line-height: 1.45; }
+.mapwrap.is-live .mapfall { display: none; }
+
+/* ---------- pins ---------------------------------------------------------- */
+
+.pin {
+  position: relative;
+  width: 26px; height: 26px;
+  border-radius: 50% 50% 50% 2px;
+  transform: rotate(-45deg);
+  background: var(--ball);
+  box-shadow: 0 2px 6px rgba(0,0,0,.45);
+  display: grid; place-items: center;
+}
+.pin::after {
+  content: ""; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--court-deep);
+}
+.pin--warn { background: #E8875C; }
+.pin--me   { background: var(--tape); border-radius: 50%; transform: none; width: 16px; height: 16px; }
+.pin--me::after { width: 6px; height: 6px; background: var(--court); }
+.pin--drop { animation: pindrop 420ms cubic-bezier(0.3, 0, 0.2, 1) backwards; }
+@keyframes pindrop {
+  from { transform: rotate(-45deg) translate3d(0, -26px, 0) scale(.6); opacity: 0; }
+  to   { transform: rotate(-45deg); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .pin--drop { animation: none; } }
+
+/* Leaflet wraps markers in its own positioned div; keep ours unstyled by it */
+.leaflet-div-icon { background: none; border: 0; }
+
+/* ---------- popups -------------------------------------------------------- */
+
+.leaflet-popup-content-wrapper {
+  background: var(--tape); color: var(--ink);
+  border-radius: var(--r-card);
+  box-shadow: 0 2px 4px rgba(0,0,0,.2), 0 14px 34px rgba(0,0,0,.32);
+}
+.leaflet-popup-content { margin: 12px 14px; font-family: Inter, system-ui, sans-serif; }
+.leaflet-popup-tip { background: var(--tape); }
+.leaflet-popup-close-button { color: var(--mute) !important; }
+
+.pop__when { font-size: 12px; font-weight: 600; color: var(--court); font-variant-numeric: tabular-nums; }
+.pop__title { display: block; font-size: 14.5px; font-weight: 600; margin: 2px 0 1px; line-height: 1.25; }
+.pop__where { display: block; font-size: 12.5px; color: var(--mute); line-height: 1.4; }
+.pop__meta { display: block; font-size: 12.5px; margin-top: 6px; color: var(--grow); font-weight: 500; }
+.pop__meta--warn { color: var(--flag); }
+.pop__go {
+  display: inline-block; margin-top: 9px;
+  font-size: 12.5px; font-weight: 600; color: var(--court);
+  text-decoration: none; border-bottom: 1.5px solid rgba(18,59,99,.35);
+  padding-bottom: 1px;
+}
+
+/* ---------- controls ------------------------------------------------------ */
+
+.leaflet-control-zoom a {
+  background: var(--tape); color: var(--ink);
+  border-color: var(--hair);
+}
+.leaflet-control-zoom a:hover { background: #EFEEE7; }
+.leaflet-control-attribution {
+  background: rgba(11,37,66,.78) !important;
+  color: rgba(250,250,247,.62) !important;
+  font-size: 10.5px !important;
+}
+.leaflet-control-attribution a { color: rgba(250,250,247,.82) !important; }
+
+/* ---------- list / map toggle on the feed --------------------------------- */
+
+.viewswitch { display: flex; gap: 12px; margin: 0 0 12px; }
+
+/* ---------- directions row ------------------------------------------------ */
+
+.gorow {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-top: 10px;
+}
+.gorow__addr { font-size: 12.5px; color: var(--mute); line-height: 1.45; }
+.golink {
+  flex: none;
+  font-size: 13px; font-weight: 600; color: var(--court);
+  text-decoration: none;
+  padding: 10px 14px; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: var(--r-ctl);
+  box-shadow: inset 0 0 0 1.5px var(--hair);
+  transition: background-color var(--fast) ease-out;
+}
+@media (hover: hover) { .golink:hover { background: rgba(18,59,99,.05); } }
+.golink:active { transform: scale(0.97); }
+
+/* ---------- host pin picker ----------------------------------------------- */
+
+.pickhint {
+  margin: 8px 0 0; font-size: 12.5px; color: var(--mute); line-height: 1.45;
+}
+.pickcoords {
+  font-variant-numeric: tabular-nums;
+  font-size: 12.5px; color: var(--court); font-weight: 600;
+}

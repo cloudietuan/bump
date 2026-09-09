@@ -65,7 +65,64 @@
     // a new screen always starts at its own top
     if (root.scrollTo) { root.scrollTo({ top: 0, behavior: 'auto' }); }
     else { root.scrollTop = 0; }
+
+    buildMaps(id);
   }
+
+  /* ---------- maps ---------- */
+  /* Built on first reveal, never before: Leaflet measures its container when it
+     initialises, and a container inside a hidden screen measures zero, which
+     renders as a grey void that no amount of later CSS fixes. */
+
+  function buildMaps(id) {
+    if (!window.BumpMap) { return; }          // CDN did not arrive; fallbacks stand
+
+    if (id === '3') {
+      var venueEl = document.querySelector('[data-map="venue"]');
+      if (venueEl) {
+        window.BumpMap.venue(venueEl, venueEl.dataset.venue);
+        window.BumpMap.refresh(venueEl.dataset.venue);
+      }
+    }
+
+    if (id === '4') {
+      var pickEl = document.querySelector('[data-map="picker"]');
+      if (pickEl) {
+        window.BumpMap.picker(pickEl, function (lat, lng) {
+          var out = document.querySelector('[data-pick-coords]');
+          if (out) { out.textContent = lat.toFixed(4) + ', ' + lng.toFixed(4); }
+        });
+        window.BumpMap.refresh('picker');
+      }
+    }
+  }
+
+  /* ---------- feed: list or map ---------- */
+
+  var viewBtns = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
+
+  viewBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var want = btn.dataset.view;
+
+      viewBtns.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-on', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+
+      document.querySelectorAll('[data-view-panel]').forEach(function (panel) {
+        panel.hidden = panel.dataset.viewPanel !== want;
+      });
+
+      if (want === 'map' && window.BumpMap) {
+        var el = document.querySelector('[data-map="overview"]');
+        // tapping a pin opens that game, same as tapping the card in the list
+        window.BumpMap.overview(el, function () { show('3'); });
+        window.BumpMap.refresh('overview');
+      }
+    });
+  });
 
   /* ---------- routing ---------- */
 
@@ -112,7 +169,8 @@
     });
   });
 
-  document.querySelectorAll('.segment').forEach(function (group) {
+  // the view switch is a .segment too, but it has its own handler above
+  document.querySelectorAll('.segment:not(.viewswitch)').forEach(function (group) {
     group.querySelectorAll('.seg').forEach(function (seg) {
       seg.addEventListener('click', function () {
         group.querySelectorAll('.seg').forEach(function (s) {

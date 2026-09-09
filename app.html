@@ -9,8 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=10">
-<link rel="stylesheet" href="app-ui.css?v=10">
+<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="app-ui.css?v=11">
+<link rel="stylesheet" href="map.css?v=11">
 </head>
 <body class="appbody">
 
@@ -83,7 +85,20 @@
     <button class="chip" aria-pressed="false">Has spots</button>
   </div>
 
-  <div class="feedlist">
+  <div class="segment viewswitch" role="group" aria-label="View">
+    <button class="seg is-on" aria-pressed="true" data-view="list">List</button>
+    <button class="seg" aria-pressed="false" data-view="map">Map</button>
+  </div>
+
+  <div class="mapwrap mapwrap--tall" data-view-panel="map" hidden>
+    <div class="mapfall">
+      <span class="mapfall__name">Games near Berkeley</span>
+      <span class="mapfall__addr">Map unavailable. This week's games are at James Kenney Rec Center, Albany Community Center and Berkeley YMCA.</span>
+    </div>
+    <div class="mapcanvas" data-map="overview"></div>
+  </div>
+
+  <div class="feedlist" data-view-panel="list">
     <button class="game" data-goto="3">
       <span class="game__when"><b>Tue</b><span class="num">7:00p</span></span>
       <span class="game__main">
@@ -166,6 +181,19 @@
     <div class="roster__faces" aria-hidden="true"><i>M</i><i>J</i><i>T</i><i>A</i><i>K</i><i class="more num">+6</i></div>
   </div>
 
+  <h4 class="sub">Where</h4>
+  <div class="mapwrap mapwrap--mini">
+    <div class="mapfall">
+      <span class="mapfall__name">James Kenney Rec Center</span>
+      <span class="mapfall__addr">1720 Eighth St, Berkeley, CA 94710</span>
+    </div>
+    <div class="mapcanvas" data-map="venue" data-venue="kenney"></div>
+  </div>
+  <div class="gorow">
+    <span class="gorow__addr">1720 Eighth St, Berkeley, CA 94710</span>
+    <a class="golink" href="https://www.google.com/maps/dir/?api=1&destination=1720%20Eighth%20St%2C%20Berkeley%2C%20CA%2094710" target="_blank" rel="noopener noreferrer">Directions</a>
+  </div>
+
   <div class="actionbar">
     <button class="btn btn--primary" data-confirm>Save my spot</button>
     <button class="btn btn--ghost">Bring a friend</button>
@@ -193,6 +221,19 @@
     <span class="field__label">Where</span>
     <span class="field__value">Ohlone Park, outdoor grass</span>
   </div>
+
+  <div class="mapwrap mapwrap--pick">
+    <div class="mapfall">
+      <span class="mapfall__name">Drop a pin</span>
+      <span class="mapfall__addr">Map unavailable. Give the cross streets in the note below instead.</span>
+    </div>
+    <div class="mapcanvas" data-map="picker"></div>
+  </div>
+  <p class="pickhint">
+    Tap the map or drag the pin to the exact court. Players see this, so which
+    corner of the park matters.
+    <span class="pickcoords" data-pick-coords>37.8736, -122.2830</span>
+  </p>
   <div class="field field--split">
     <span><span class="field__label">When</span><span class="field__value num">Sat, 10:00a</span></span>
     <span><span class="field__label">Players</span><span class="field__value num">12</span></span>
@@ -324,6 +365,8 @@
 
 </div>
 
-<script src="app-ui.js?v=10"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="map.js?v=11"></script>
+<script src="app-ui.js?v=11"></script>
 </body>
 </html>
