@@ -108,16 +108,24 @@ visible focus rings, and a full `prefers-reduced-motion` fallback.
 The rotation diagram on screen one is a functional part of the question rather
 than decoration.
 
+The site opens with a volleyball that drops, lands, and knocks the cover apart.
+The sequence is entirely CSS-timed and ends on `visibility: hidden`, and the
+cover carries `pointer-events: none` throughout, so a script failure cannot
+leave the page hidden or unclickable. JavaScript only decides whether to play
+it: once per session, and never under `prefers-reduced-motion`.
+
 ## Files
 
 ```
 index.html     the website
 positions.html the positions guide
-site.css       website layout and components
-site.js        sticky nav, reveal on scroll
+site.css       website layout, components, graphic layer
+site.js        sticky nav, reveal on scroll, opening sequence
+intro.css      the volleyball opening sequence
 
 positions.py   position copy, single source
-gen.py         regenerates positions.html from it
+ball.py        the volleyball SVG, drawn once
+gen.py         regenerates positions.html from both
 
 app.html       the app
 app-ui.css     app shell: app bar, screens, bottom nav
