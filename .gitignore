@@ -10,3 +10,6 @@ sk_user_*
 Thumbs.db
 .vscode/
 .idea/
+
+# local dev server config
+.claude/
