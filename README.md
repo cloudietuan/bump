@@ -39,10 +39,15 @@ Two publishable UIs, a reference guide, and the original case study.
 | `positions.html` | **The positions guide.** Outside, opposite, middle, setter, libero and defensive specialist, each in plain language, opening with the rotation diagram. |
 | `prototype.html` | The original case-study page: the clickable phone plus the four-screen gallery. |
 
-The app's screens live in one place. `app.html` carries them, and the two
-showcase phones on the website are generated from the same markup with the
-routing hooks stripped and every control made unfocusable, so the marketing
-copies cannot drift from the real thing.
+The app's screens live in one place: `app.html`. The two showcase phones on the
+website are generated from it by `sync.py`, which strips every routing hook,
+removes the map surfaces (the site does not load Leaflet), demotes the screen
+headings so decoration stays out of the document outline, and makes every
+control unfocusable.
+
+**Run `python3 sync.py` after changing an app screen.** It is not automatic —
+the showcases went stale once already, advertising a feed with no map toggle
+after the maps landed.
 
 Position copy works the same way. It lives in `positions.py` and is rendered
 into three places — the full guide, the homepage strip, and the in-app list —
@@ -131,6 +136,7 @@ intro.css      the volleyball opening sequence
 positions.py   position copy, single source
 ball.py        the volleyball SVG, drawn once
 gen.py         regenerates positions.html from both
+sync.py        regenerates the showcase phones from app.html
 
 app.html       the app
 app-ui.css     app shell: app bar, screens, bottom nav

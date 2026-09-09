@@ -33,6 +33,7 @@ body.sitebody { padding-top: 62px; }
 .topnav__mark {
   display: inline-flex; align-items: center; gap: 9px;
   text-decoration: none; color: var(--tape); margin-right: auto;
+  min-height: 44px;
 }
 .topnav__mark i {
   width: 17px; height: 17px; border-radius: 50%; background: var(--ball);
@@ -76,9 +77,9 @@ body.sitebody { padding-top: 62px; }
 
 .hero {
   max-width: var(--shell); margin: 0 auto;
-  padding: 74px var(--gutter) 88px;
-  display: grid; grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 64px; align-items: center;
+  padding: clamp(44px, 5.5vw, 82px) var(--gutter) clamp(52px, 6vw, 92px);
+  display: grid; grid-template-columns: minmax(0, 1fr) clamp(280px, 28vw, 380px);
+  gap: clamp(32px, 4.5vw, 68px); align-items: center;
 }
 
 .hero__eyebrow {
@@ -103,10 +104,10 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- section furniture -------------------------------------------- */
 
-.band { padding: 78px 0; border-top: 1px solid rgba(250,250,247,.1); }
+.band { padding: clamp(46px, 5.5vw, 82px) 0; border-top: 1px solid rgba(250,250,247,.1); }
 .band--quiet { background: rgba(250,250,247,.022); }
 
-.band__head { max-width: 620px; margin: 0 0 44px; }
+.band__head { max-width: 68ch; margin: 0 0 clamp(28px, 3.4vw, 46px); }
 .band__kicker {
   font-family: 'Barlow Condensed', Inter, sans-serif;
   font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
@@ -144,7 +145,7 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- steps -------------------------------------------------------- */
 
-.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 34px; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(216px, 1fr)); gap: clamp(24px, 2.6vw, 38px); }
 .step-card { display: grid; gap: 10px; align-content: start; }
 .step-card__n {
   font-family: 'Barlow Condensed', Inter, sans-serif;
@@ -160,7 +161,7 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- feature cards ------------------------------------------------ */
 
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(272px, 1fr)); gap: clamp(14px, 1.5vw, 22px); }
 .card {
   border: 1px solid rgba(250,250,247,.14);
   border-radius: 16px; padding: 24px 22px;
@@ -181,8 +182,8 @@ body.sitebody { padding-top: 62px; }
 /* ---------- host split --------------------------------------------------- */
 
 .split {
-  display: grid; grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 64px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) clamp(280px, 28vw, 380px);
+  gap: clamp(32px, 4.5vw, 68px); align-items: center;
 }
 .split__device { justify-self: end; }
 @media (max-width: 900px) {
@@ -199,7 +200,7 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- closing ------------------------------------------------------ */
 
-.closer { padding: 92px 0 100px; text-align: center; }
+.closer { padding: clamp(56px, 7vw, 96px) 0 clamp(62px, 7.5vw, 104px); text-align: center; }
 .closer h2 {
   font-family: 'Barlow Condensed', Inter, sans-serif;
   font-weight: 600; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.04;
@@ -232,7 +233,7 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- the phone on the site is decoration, not a control ----------- */
 
-.showcase { width: 360px; max-width: 100%; }
+.showcase { width: 100%; max-width: 360px; }
 .showcase .app { padding: 4px 18px 20px; }
 
 /* ---------- responsive --------------------------------------------------- */
@@ -250,7 +251,7 @@ body.sitebody { padding-top: 62px; }
    Positions
    ========================================================================== */
 
-.poshero { padding: 66px 0 20px; }
+.poshero { padding: clamp(40px, 5vw, 70px) 0 20px; }
 .poshero h1 {
   font-family: 'Barlow Condensed', Inter, sans-serif;
   font-weight: 600; font-size: clamp(38px, 5vw, 60px); line-height: 1.02;
@@ -349,10 +350,12 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- compact position strip on the homepage ----------------------- */
 
-.posstrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-/* six items: three across reads as two clean rows, never a 5 + 1 orphan */
-@media (max-width: 900px) { .posstrip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 520px) { .posstrip { grid-template-columns: 1fr; } }
+.posstrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 16px); }
+/* Six items divide evenly only by 1, 2, 3 and 6, so the column count steps
+   between those. auto-fit would land on 4 or 5 and orphan the last chip. */
+@media (min-width: 1220px) { .posstrip { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 900px)  { .posstrip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px)  { .posstrip { grid-template-columns: 1fr; } }
 .poschip {
   border: 1px solid rgba(250,250,247,.14);
   border-radius: 14px; padding: 18px 17px;
@@ -462,3 +465,11 @@ body.sitebody { padding-top: 62px; }
   pointer-events: none;
 }
 .closer > * { position: relative; }
+
+/* Showcase phones are decoration. Their screen titles keep the type styles of
+   real headings but are paragraphs, so they do not appear in the document
+   outline — an h1 followed by a decorative h3 reads as a skipped level. */
+.showcase .prompt, .showcase .feedhead__title, .showcase .detail__title {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600;
+}

@@ -24,9 +24,12 @@
   --r-card:  12px;
   --r-ctl:   10px;
 
-  /* one shell width for every section so left edges align */
-  --shell:  1180px;
-  --gutter: 20px;
+  /* One shell for every section so left edges align. It is deliberately wide
+     and the gutter scales with the viewport: on a large screen the content
+     should use the room rather than sit in a narrow column, and on a small one
+     the margins should get out of the way. */
+  --shell:  1440px;
+  --gutter: clamp(14px, 2.6vw, 32px);
 
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --fast: 150ms;
@@ -55,7 +58,7 @@ body {
 
 /* ---------- masthead ---------------------------------------------------- */
 
-.masthead { max-width: var(--shell); margin: 0 auto; padding: 72px var(--gutter) 60px; }
+.masthead { max-width: var(--shell); margin: 0 auto; padding: clamp(44px, 6vw, 78px) var(--gutter) clamp(38px, 4.5vw, 60px); }
 
 .wordmark { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
 .wordmark__ball {

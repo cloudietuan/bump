@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=10">
-<link rel="stylesheet" href="site.css?v=10">
-<link rel="stylesheet" href="intro.css?v=10">
+<link rel="stylesheet" href="styles.css?v=14">
+<link rel="stylesheet" href="site.css?v=14">
+<link rel="stylesheet" href="intro.css?v=14">
 </head>
 <body class="sitebody intro-hold">
 
@@ -92,67 +92,74 @@
       </span>
     </div>
         <div class="viewport">
-          <section class="app is-active app--feed" aria-label="Games near you">
-        <div class="feedhead">
-          <p class="feedhead__where">Berkeley, CA</p>
-          <h3 class="feedhead__title">This week</h3>
-        </div>
+<section class="app is-active app--feed" hidden aria-label="Games near you">
+  <div class="feedhead">
+    <p class="feedhead__where">Berkeley, CA</p>
+    <p class="feedhead__title">This week</p>
+  </div>
 
-        <div class="chips" role="group" aria-label="Filters">
-          <button tabindex="-1" class="chip is-on" aria-pressed="true">Still learning</button>
-          <button tabindex="-1" class="chip" aria-pressed="false">Indoor</button>
-          <button tabindex="-1" class="chip" aria-pressed="false">Under $10</button>
-          <button tabindex="-1" class="chip" aria-pressed="false">Has spots</button>
-        </div>
+  <div class="chips" role="group" aria-label="Filters">
+    <button tabindex="-1" class="chip is-on" aria-pressed="true">Still learning</button>
+    <button tabindex="-1" class="chip" aria-pressed="false">Indoor</button>
+    <button tabindex="-1" class="chip" aria-pressed="false">Under $10</button>
+    <button tabindex="-1" class="chip" aria-pressed="false">Has spots</button>
+  </div>
 
-        <div class="feedlist">
-          <button tabindex="-1" class="game">
-            <span class="game__when"><b>Tue</b><span class="num">7:00p</span></span>
-            <span class="game__main">
-              <span class="game__title">Open play, no experience needed</span>
-              <span class="game__where">James Kenney Rec Center, 0.8 mi</span>
-              <span class="signals">
-                <span class="signal signal--good"><span class="num">4</span> of <span class="num">11</span> going are first-timers</span>
-                <span class="signal">Maya has hosted this <span class="num">23</span> times</span>
-                <span class="signal"><span class="num">$5</span>, come alone, no team needed</span>
-              </span>
-            </span>
-            <span class="game__spots num">7 spots</span>
-          </button>
+  <div class="segment viewswitch" role="group" aria-label="View">
+    <button tabindex="-1" class="seg is-on" aria-pressed="true">List</button>
+    <button tabindex="-1" class="seg" aria-pressed="false">Map</button>
+  </div>
 
-          <button tabindex="-1" class="game">
-            <span class="game__when"><b>Wed</b><span class="num">8:00p</span></span>
-            <span class="game__main">
-              <span class="game__title">Learn to pass, then scrimmage</span>
-              <span class="game__where">Albany Community Center, 2.1 mi</span>
-              <span class="signals">
-                <span class="signal signal--good">First session is free</span>
-                <span class="signal"><span class="num">30</span> min of drills, then games to <span class="num">15</span></span>
-                <span class="signal">Nobody keeps score</span>
-              </span>
-            </span>
-            <span class="game__spots num">3 spots</span>
-          </button>
+  
 
-          <button tabindex="-1" class="game game--stretch">
-            <span class="game__when"><b>Thu</b><span class="num">7:30p</span></span>
-            <span class="game__main">
-              <span class="game__title">6v6 competitive</span>
-              <span class="game__where">Berkeley YMCA, 1.4 mi</span>
-              <span class="signals">
-                <span class="signal signal--warn">Above your level. Host expects an overhand serve.</span>
-              </span>
-            </span>
-            <span class="game__spots num">Full</span>
-          </button>
-        </div>
+  <div class="feedlist"-panel="list">
+    <button tabindex="-1" class="game">
+      <span class="game__when"><b>Tue</b><span class="num">7:00p</span></span>
+      <span class="game__main">
+        <span class="game__title">Open play, no experience needed</span>
+        <span class="game__where">James Kenney Rec Center, 0.8 mi</span>
+        <span class="signals">
+          <span class="signal signal--good"><span class="num">4</span> of <span class="num">11</span> going are first-timers</span>
+          <span class="signal">Maya has hosted this <span class="num">23</span> times</span>
+          <span class="signal"><span class="num">$5</span>, come alone, no team needed</span>
+        </span>
+      </span>
+      <span class="game__spots num">7 spots</span>
+    </button>
 
-        <nav class="tabs" aria-label="Sections">
-          <button tabindex="-1" class="tab is-on">Games</button>
-          <button tabindex="-1" class="tab">Hosting</button>
-          <button tabindex="-1" class="tab">You</button>
-        </nav>
-      </section>
+    <button tabindex="-1" class="game">
+      <span class="game__when"><b>Wed</b><span class="num">8:00p</span></span>
+      <span class="game__main">
+        <span class="game__title">Learn to pass, then scrimmage</span>
+        <span class="game__where">Albany Community Center, 2.1 mi</span>
+        <span class="signals">
+          <span class="signal signal--good">First session is free</span>
+          <span class="signal"><span class="num">30</span> min of drills, then games to <span class="num">15</span></span>
+          <span class="signal">Nobody keeps score</span>
+        </span>
+      </span>
+      <span class="game__spots num">3 spots</span>
+    </button>
+
+    <button tabindex="-1" class="game game--stretch">
+      <span class="game__when"><b>Thu</b><span class="num">7:30p</span></span>
+      <span class="game__main">
+        <span class="game__title">6v6 competitive</span>
+        <span class="game__where">Berkeley YMCA, 1.4 mi</span>
+        <span class="signals">
+          <span class="signal signal--warn">Above your level. Host expects an overhand serve.</span>
+        </span>
+      </span>
+      <span class="game__spots num">Full</span>
+    </button>
+  </div>
+
+  <nav class="tabs" aria-label="Sections">
+    <button tabindex="-1" class="tab is-on">Games</button>
+    <button tabindex="-1" class="tab">Hosting</button>
+    <button tabindex="-1" class="tab">You</button>
+  </nav>
+</section>
         </div>
       </div>
     </div>
@@ -374,56 +381,56 @@
       </span>
     </div>
         <div class="viewport">
-          <section class="app is-active app--host" aria-label="Host a game">
-        <button tabindex="-1" class="back">Back</button>
+<section class="app is-active app--host" hidden aria-label="Host a game">
+  <button tabindex="-1" class="back">Back</button>
 
-        <h3 class="detail__title">New game</h3>
+  <p class="detail__title">New game</p>
 
-        <div class="segment" role="group" aria-label="Game type">
-          <button tabindex="-1" class="seg is-on" aria-pressed="true">Open play</button>
-          <button tabindex="-1" class="seg" aria-pressed="false">Pickup 6v6</button>
-          <button tabindex="-1" class="seg" aria-pressed="false">Drills first</button>
-          <button tabindex="-1" class="seg" aria-pressed="false">Court share</button>
-        </div>
+  <div class="segment" role="group" aria-label="Game type">
+    <button tabindex="-1" class="seg is-on" aria-pressed="true">Open play</button>
+    <button tabindex="-1" class="seg" aria-pressed="false">Pickup 6v6</button>
+    <button tabindex="-1" class="seg" aria-pressed="false">Drills first</button>
+    <button tabindex="-1" class="seg" aria-pressed="false">Court share</button>
+  </div>
 
-        <div class="field">
-          <span class="field__label">Where</span>
-          <span class="field__value">Ohlone Park, outdoor grass</span>
-        </div>
-        <div class="field field--split">
-          <span><span class="field__label">When</span><span class="field__value num">Sat, 10:00a</span></span>
-          <span><span class="field__label">Players</span><span class="field__value num">12</span></span>
-        </div>
-        <div class="field">
-          <span class="field__label">Cost per player</span>
-          <span class="field__value num">$0</span>
-        </div>
+  <div class="field">
+    <span class="field__label">Where</span>
+    <span class="field__value">Ohlone Park, outdoor grass</span>
+  </div>
+  <div class="field field--split">
+    <span><span class="field__label">When</span><span class="field__value num">Sat, 10:00a</span></span>
+    <span><span class="field__label">Players</span><span class="field__value num">12</span></span>
+  </div>
+  <div class="field">
+    <span class="field__label">Cost per player</span>
+    <span class="field__value num">$0</span>
+  </div>
 
-        <button tabindex="-1" class="toggle is-on" aria-pressed="true">
-          <span class="toggle__switch" aria-hidden="true"></span>
-          <span>
-            <span class="toggle__name">Welcome first-timers</span>
-            <span class="toggle__help">Your game shows up for people still learning.
-            You agree to explain rotations before the first serve.</span>
-          </span>
-        </button>
+  <button tabindex="-1" class="toggle is-on" aria-pressed="true">
+    <span class="toggle__switch" aria-hidden="true"></span>
+    <span>
+      <span class="toggle__name">Welcome first-timers</span>
+      <span class="toggle__help">Your game shows up for people still learning.
+      You agree to explain rotations before the first serve.</span>
+    </span>
+  </button>
 
-        <button tabindex="-1" class="toggle" aria-pressed="false">
-          <span class="toggle__switch" aria-hidden="true"></span>
-          <span>
-            <span class="toggle__name">Require overhand serve</span>
-            <span class="toggle__help">Turn on only for competitive nights.</span>
-          </span>
-        </button>
+  <button tabindex="-1" class="toggle" aria-pressed="false">
+    <span class="toggle__switch" aria-hidden="true"></span>
+    <span>
+      <span class="toggle__name">Require overhand serve</span>
+      <span class="toggle__help">Turn on only for competitive nights.</span>
+    </span>
+  </button>
 
-        <h4 class="sub">Say something to newcomers</h4>
-        <p class="notefield">Nobody keeps score before noon.<span class="caret" aria-hidden="true"></span></p>
+  <p class="sub">Say something to newcomers</p>
+  <p class="notefield">Nobody keeps score before noon.<span class="caret" aria-hidden="true"></span></p>
 
-        <div class="actionbar">
-          <button tabindex="-1" class="btn btn--primary">Post game</button>
-          <button tabindex="-1" class="btn btn--ghost">Copy invite link</button>
-        </div>
-      </section>
+  <div class="actionbar">
+    <button tabindex="-1" class="btn btn--primary">Post game</button>
+    <button tabindex="-1" class="btn btn--ghost">Copy invite link</button>
+  </div>
+</section>
         </div>
       </div>
     </div>
@@ -457,6 +464,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=10"></script>
+<script src="site.js?v=14"></script>
 </body>
 </html>
