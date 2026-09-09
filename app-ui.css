@@ -56,7 +56,10 @@ body.appbody {
   color: var(--court); font-size: 20px; line-height: 1;
   transition: background-color var(--fast) ease-out, opacity var(--fast) ease-out;
 }
-.appbar__btn[hidden] { display: none; }
+/* A hidden back button must keep its grid cell. With display:none it leaves
+   the grid, the title slides into the 44px first column, and "Host a game"
+   wraps into the corner instead of centring. */
+.appbar__btn[hidden] { display: grid; visibility: hidden; }
 @media (hover: hover) { .appbar__btn:hover { background: rgba(18,59,99,.07); } }
 .appbar__btn:active { transform: scale(0.94); }
 
