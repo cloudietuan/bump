@@ -370,3 +370,90 @@ body.sitebody { padding-top: 62px; }
   font-size: 20px; font-weight: 600; line-height: 1.15;
 }
 .poschip__what { font-size: 13.5px; line-height: 1.5; color: rgba(250,250,247,.64); }
+
+/* ==========================================================================
+   Graphic layer
+   Court geometry used as page furniture: seam rules, a net divider, the ball
+   as a watermark, and oversized section numerals.
+   ========================================================================== */
+
+/* ---------- ball watermark behind the hero ------------------------------- */
+
+.hero { position: relative; }
+.hero__mark {
+  position: absolute; right: -120px; top: -90px;
+  width: 620px; height: 620px;
+  opacity: .05; pointer-events: none; z-index: 0;
+  animation: slowspin 90s linear infinite;
+}
+.hero__mark svg { width: 100%; height: 100%; display: block; }
+@keyframes slowspin { to { transform: rotate(360deg); } }
+.hero > * { position: relative; z-index: 1; }
+@media (max-width: 900px) { .hero__mark { width: 400px; height: 400px; right: -140px; top: -60px; } }
+@media (prefers-reduced-motion: reduce) { .hero__mark { animation: none; } }
+
+/* ---------- a net rule between bands ------------------------------------- */
+
+.netrule {
+  height: 3px; margin: 0;
+  background: repeating-linear-gradient(90deg,
+    rgba(250,250,247,.34) 0 6px, transparent 6px 12px);
+  border: 0;
+}
+
+/* ---------- section kickers get a ball glyph ----------------------------- */
+
+.band__kicker { display: flex; align-items: center; gap: 9px; }
+.band__kicker::before {
+  content: ""; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--ball); flex: none;
+  box-shadow: inset -2px -2px 0 -1px var(--court-deep);
+}
+
+/* ---------- oversized numerals on the walkthrough ------------------------ */
+
+.step-card { position: relative; padding-top: 6px; }
+.step-card__ghost {
+  position: absolute; right: 0; top: -22px;
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 104px; font-weight: 700; line-height: 1;
+  color: rgba(250,250,247,.045);
+  pointer-events: none; user-select: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- court corner marks on the signal cards ----------------------- */
+
+.card { position: relative; overflow: hidden; }
+.card::before {
+  content: ""; position: absolute; right: -34px; top: -34px;
+  width: 92px; height: 92px; border-radius: 50%;
+  border: 1.5px solid rgba(239,191,67,.16);
+  pointer-events: none;
+  transition: transform var(--fast) ease-out, border-color var(--fast) ease-out;
+}
+@media (hover: hover) {
+  .card:hover::before { transform: scale(1.12); border-color: rgba(239,191,67,.34); }
+}
+
+/* ---------- position chips carry a court-zone tint ----------------------- */
+
+.poschip { position: relative; overflow: hidden; }
+.poschip::after {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--ball); opacity: .5;
+  transition: opacity var(--fast) ease-out;
+}
+@media (hover: hover) { .poschip:hover::after { opacity: 1; } }
+
+/* ---------- closing band sits on a court arc ----------------------------- */
+
+.closer { position: relative; overflow: hidden; }
+.closer::before {
+  content: ""; position: absolute; left: 50%; top: 0;
+  width: 760px; height: 760px; margin-left: -380px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(250,250,247,.07);
+  pointer-events: none;
+}
+.closer > * { position: relative; }

@@ -6,6 +6,31 @@
 
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* ---------- opening sequence ---------- */
+  /* The cover is CSS-timed and clears itself, so this only decides whether to
+     play it at all. Seen once, it is skipped for the rest of the session —
+     an intro that replays on every internal link stops being an intro. */
+
+  var intro = document.querySelector('[data-intro]');
+
+  if (intro) {
+    var seen = false;
+    try { seen = sessionStorage.getItem('bump.intro') === '1'; } catch (e) { /* private mode */ }
+
+    if (seen || calm.matches) {
+      intro.classList.add('intro--skip');
+      document.body.classList.remove('intro-hold');
+    } else {
+      try { sessionStorage.setItem('bump.intro', '1'); } catch (e) { /* ignore */ }
+      // drop the cover from the tree once it has finished, so nothing of it
+      // can sit over the page holding a stacking context
+      window.setTimeout(function () {
+        if (intro.parentNode) { intro.parentNode.removeChild(intro); }
+        document.body.classList.remove('intro-hold');
+      }, 1900);
+    }
+  }
+
   /* ---------- nav gains a border once the page moves ---------- */
 
   var nav = document.querySelector('[data-topnav]');

@@ -63,6 +63,17 @@ def strip():
         </a>''' % (p['abbr'], p['name'], p['short']))
     return '\n'.join(out)
 
+import ball as ballmod
+INTRO = '''<div class="intro" data-intro aria-hidden="true">
+  <div class="intro__panel intro__panel--top"></div>
+  <div class="intro__panel intro__panel--bottom"></div>
+  <span class="intro__ring" aria-hidden="true"></span>
+  <div class="intro__ball">
+        %s
+  </div>
+</div>
+''' % ballmod.ball()
+
 PAGE = '''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,11 +85,12 @@ PAGE = '''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
-<link rel="stylesheet" href="site.css?v=6">
+<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="site.css?v=8">\n<link rel="stylesheet" href="intro.css?v=8">
 </head>
-<body class="sitebody">
+<body class="sitebody intro-hold">
 
+%(intro)s
 %(nav)s
 
 <main>
@@ -161,10 +173,10 @@ PAGE = '''<!DOCTYPE html>
   </div>
 </footer>
 
-<script src="site.js?v=6"></script>
+<script src="site.js?v=8"></script>
 </body>
 </html>
-''' % dict(nav=NAV, court=court(), cards=cards())
+''' % dict(nav=NAV, intro=INTRO, court=court(), cards=cards())
 
 open('positions.html','w').write(PAGE)
 open('/private/tmp/claude-501/-Users-jtavu-Downloads-websiteforuxclub/e5bcbbfa-4538-4e37-a6b4-54e6948ca799/scratchpad/strip.html','w').write(strip())
