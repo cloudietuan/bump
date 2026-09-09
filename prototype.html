@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bump — pickup volleyball for people who don't have a group yet</title>
+<meta name="description" content="A mobile app concept that helps beginners find local volleyball games where they won't feel out of place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wordmark">
+    <span class="wordmark__ball" aria-hidden="true"></span>
+    <span class="wordmark__text">Bump</span>
+  </div>
+  <h1>Volleyball is easy to love and hard to walk into.</h1>
+  <p class="lede">
+    Most apps help you find a game. Bump helps you find a game where nobody
+    minds that you just started.
+  </p>
+  <dl class="premise">
+    <div><dt>The barrier</dt><dd>You need six people, a net, a gym, and the nerve to show up alone.</dd></div>
+    <div><dt>The fix</dt><dd>Plain-language skill levels, first-timer counts, and a schedule of what happens when you arrive.</dd></div>
+  </dl>
+</header>
+
+<!-- ====================== LIVE PROTOTYPE ====================== -->
+<section class="lab">
+  <div class="lab__intro">
+    <h2>Try it</h2>
+    <p>Working prototype. Answer the question, pick a game, save a spot.</p>
+    <nav class="jump" aria-label="Jump to screen">
+      <button class="jump__btn is-on" data-goto="1">Level</button>
+      <button class="jump__btn" data-goto="2">Games</button>
+      <button class="jump__btn" data-goto="3">Detail</button>
+      <button class="jump__btn" data-goto="4">Host</button>
+    </nav>
+  </div>
+
+  <div class="phone phone--live">
+    <div class="statusbar">
+      <span class="num">7:04</span>
+      <span class="statusbar__icons" aria-hidden="true">
+        <i class="bar"></i><i class="bar"></i><i class="bar bar--dim"></i>
+        <b class="num">82%</b>
+      </span>
+    </div>
+
+    <div class="viewport">
+
+      <!-- ---------- 1. onboarding ---------- -->
+      <section class="app app--onboard is-active" data-screen="1" aria-label="Find your level">
+        <p class="step num">Question 3 of 3</p>
+        <h3 class="prompt">Where do you stand when the ball is served?</h3>
+
+        <div class="court" role="img" aria-label="Volleyball court with six numbered rotation positions">
+          <div class="court__half">
+            <span class="zone num">4</span><span class="zone num">3</span><span class="zone num">2</span>
+            <span class="zone num">5</span><span class="zone num">6</span><span class="zone zone--on num">1</span>
+          </div>
+          <div class="court__net"></div>
+        </div>
+
+        <div class="choices" role="radiogroup" aria-label="How well do you know rotations">
+          <button class="choice" role="radio" aria-checked="false" data-level="Just starting"
+                  data-note="You'll only see games where the host teaches before playing.">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__body"><b>No idea what that means</b>
+            <em>Totally fine. Hosts walk you through it.</em></span>
+          </button>
+          <button class="choice is-picked" role="radio" aria-checked="true" data-level="Still learning"
+                  data-note="We'll show you games where at least a third of the players said the same thing.">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__body"><b>I follow along if someone points</b>
+            <em>You've played in gym class or on a beach.</em></span>
+          </button>
+          <button class="choice" role="radio" aria-checked="false" data-level="Comfortable"
+                  data-note="You'll see the full board, including competitive nights.">
+            <span class="choice__mark" aria-hidden="true"></span>
+            <span class="choice__body"><b>I rotate without thinking about it</b>
+            <em>You've played on a team.</em></span>
+          </button>
+        </div>
+
+        <div class="verdict">
+          <p class="verdict__label">Based on your answers</p>
+          <p class="verdict__level" data-verdict-level>Still learning</p>
+          <p class="verdict__note" data-verdict-note>We'll show you games where at least a third of the players said the same thing.</p>
+        </div>
+
+        <button class="btn btn--primary" data-goto="2">See games near me</button>
+      </section>
+
+      <!-- ---------- 2. feed ---------- -->
+      <section class="app app--feed" data-screen="2" hidden aria-label="Games near you">
+        <div class="feedhead">
+          <p class="feedhead__where">Berkeley, CA</p>
+          <h3 class="feedhead__title">This week</h3>
+        </div>
+
+        <div class="chips" role="group" aria-label="Filters">
+          <button class="chip is-on" aria-pressed="true" data-level-chip>Still learning</button>
+          <button class="chip" aria-pressed="false">Indoor</button>
+          <button class="chip" aria-pressed="false">Under $10</button>
+          <button class="chip" aria-pressed="false">Has spots</button>
+        </div>
+
+        <div class="feedlist">
+          <button class="game" data-goto="3">
+            <span class="game__when"><b>Tue</b><span class="num">7:00p</span></span>
+            <span class="game__main">
+              <span class="game__title">Open play, no experience needed</span>
+              <span class="game__where">James Kenney Rec Center, 0.8 mi</span>
+              <span class="signals">
+                <span class="signal signal--good"><span class="num">4</span> of <span class="num">11</span> going are first-timers</span>
+                <span class="signal">Maya has hosted this <span class="num">23</span> times</span>
+                <span class="signal"><span class="num">$5</span>, come alone, no team needed</span>
+              </span>
+            </span>
+            <span class="game__spots num">7 spots</span>
+          </button>
+
+          <button class="game">
+            <span class="game__when"><b>Wed</b><span class="num">8:00p</span></span>
+            <span class="game__main">
+              <span class="game__title">Learn to pass, then scrimmage</span>
+              <span class="game__where">Albany Community Center, 2.1 mi</span>
+              <span class="signals">
+                <span class="signal signal--good">First session is free</span>
+                <span class="signal"><span class="num">30</span> min of drills, then games to <span class="num">15</span></span>
+                <span class="signal">Nobody keeps score</span>
+              </span>
+            </span>
+            <span class="game__spots num">3 spots</span>
+          </button>
+
+          <button class="game game--stretch">
+            <span class="game__when"><b>Thu</b><span class="num">7:30p</span></span>
+            <span class="game__main">
+              <span class="game__title">6v6 competitive</span>
+              <span class="game__where">Berkeley YMCA, 1.4 mi</span>
+              <span class="signals">
+                <span class="signal signal--warn">Above your level. Host expects an overhand serve.</span>
+              </span>
+            </span>
+            <span class="game__spots num">Full</span>
+          </button>
+        </div>
+
+        <nav class="tabs" aria-label="Sections">
+          <button class="tab is-on" data-goto="2">Games</button>
+          <button class="tab" data-goto="4">Hosting</button>
+          <button class="tab">You</button>
+        </nav>
+      </section>
+
+      <!-- ---------- 3. detail ---------- -->
+      <section class="app app--detail" data-screen="3" hidden aria-label="Game detail">
+        <button class="back" data-goto="2">Back</button>
+
+        <p class="crumb num">Tuesday, September 15</p>
+        <h3 class="detail__title">Open play, no experience needed</h3>
+        <p class="detail__meta">James Kenney Rec Center, 1720 Eighth St. <span class="num">$5</span> at the door.</p>
+
+        <div class="host">
+          <span class="host__avatar" aria-hidden="true">M</span>
+          <span>
+            <span class="host__name">Maya R. is hosting</span>
+            <span class="host__line">“I started here two years ago knowing nothing.
+            Come by yourself, I'll take care of the rest.”</span>
+          </span>
+        </div>
+
+        <h4 class="sub">How the night goes</h4>
+        <ol class="timeline">
+          <li><span class="timeline__t num">7:00</span> <span>Check in with Maya by the door. Say it's your first time.</span></li>
+          <li><span class="timeline__t num">7:10</span> <span>Warm up passing in pairs. She pairs you with someone.</span></li>
+          <li><span class="timeline__t num">7:25</span> <span>Maya splits the teams. No captains picking.</span></li>
+          <li><span class="timeline__t num">9:00</span> <span>Gym closes. Most people get food after.</span></li>
+        </ol>
+
+        <h4 class="sub">Bring</h4>
+        <p class="bring">Water and indoor shoes. That's it. Knee pads help but half
+        the gym plays without them.</p>
+
+        <div class="roster">
+          <p class="roster__count"><span class="num">11</span> going, <span class="num">4</span> said they're new</p>
+          <div class="roster__faces" aria-hidden="true"><i>M</i><i>J</i><i>T</i><i>A</i><i>K</i><i class="more num">+6</i></div>
+        </div>
+
+        <div class="actionbar">
+          <button class="btn btn--primary" data-confirm>Save my spot</button>
+          <button class="btn btn--ghost">Bring a friend</button>
+        </div>
+
+        <p class="confirmed" data-confirmed hidden>
+          You're in. Maya knows you're new, and she'll find you at the door.
+        </p>
+      </section>
+
+      <!-- ---------- 4. host ---------- -->
+      <section class="app app--host" data-screen="4" hidden aria-label="Host a game">
+        <button class="back" data-goto="2">Back</button>
+
+        <h3 class="detail__title">New game</h3>
+
+        <div class="segment" role="group" aria-label="Game type">
+          <button class="seg is-on" aria-pressed="true">Open play</button>
+          <button class="seg" aria-pressed="false">Pickup 6v6</button>
+          <button class="seg" aria-pressed="false">Drills first</button>
+          <button class="seg" aria-pressed="false">Court share</button>
+        </div>
+
+        <div class="field">
+          <span class="field__label">Where</span>
+          <span class="field__value">Ohlone Park, outdoor grass</span>
+        </div>
+        <div class="field field--split">
+          <span><span class="field__label">When</span><span class="field__value num">Sat, 10:00a</span></span>
+          <span><span class="field__label">Players</span><span class="field__value num">12</span></span>
+        </div>
+        <div class="field">
+          <span class="field__label">Cost per player</span>
+          <span class="field__value num">$0</span>
+        </div>
+
+        <button class="toggle is-on" aria-pressed="true">
+          <span class="toggle__switch" aria-hidden="true"></span>
+          <span>
+            <span class="toggle__name">Welcome first-timers</span>
+            <span class="toggle__help">Your game shows up for people still learning.
+            You agree to explain rotations before the first serve.</span>
+          </span>
+        </button>
+
+        <button class="toggle" aria-pressed="false">
+          <span class="toggle__switch" aria-hidden="true"></span>
+          <span>
+            <span class="toggle__name">Require overhand serve</span>
+            <span class="toggle__help">Turn on only for competitive nights.</span>
+          </span>
+        </button>
+
+        <h4 class="sub">Say something to newcomers</h4>
+        <p class="notefield">Nobody keeps score before noon.<span class="caret" aria-hidden="true"></span></p>
+
+        <div class="actionbar">
+          <button class="btn btn--primary" data-goto="2">Post game</button>
+          <button class="btn btn--ghost">Copy invite link</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================== STATIC GALLERY ====================== -->
+<section class="stage" aria-label="All screens">
+  <div class="stage__intro">
+    <h2>All four screens</h2>
+    <p>What each one is doing, and why it's there.</p>
+  </div>
+
+  <div class="grid">
+    <figure class="shot" data-shot="1">
+      <figcaption>
+        <span class="shot__num num">Screen 1</span>
+        <h3>Find your level</h3>
+        <p>“Are you intermediate?” is unanswerable if you've never played. These questions aren't.</p>
+      </figcaption>
+    </figure>
+    <figure class="shot" data-shot="2">
+      <figcaption>
+        <span class="shot__num num">Screen 2</span>
+        <h3>Games near you</h3>
+        <p>Every card answers the real question, which is not “what time” but “will I be the worst one there.”</p>
+      </figcaption>
+    </figure>
+    <figure class="shot" data-shot="3">
+      <figcaption>
+        <span class="shot__num num">Screen 3</span>
+        <h3>Before you commit</h3>
+        <p>The minute-by-minute schedule is the point. Fear of an unfamiliar room is fear of not knowing what happens next.</p>
+      </figcaption>
+    </figure>
+    <figure class="shot" data-shot="4">
+      <figcaption>
+        <span class="shot__num num">Screen 4</span>
+        <h3>Host a game</h3>
+        <p>Anyone with a court reservation becomes supply. Welcoming beginners is the default, not an afterthought.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<footer class="colophon">
+  <p>Bump. HTML, CSS, and about eighty lines of JavaScript. No framework.</p>
+</footer>
+
+<script src="app.js?v=3"></script>
+</body>
+</html>

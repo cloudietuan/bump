@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Bump — marketing site.
+
+   Loads after styles.css for the tokens and the phone/screen components. This
+   file owns the website itself: navigation, hero, sections, footer. Kept to the
+   same rules as the rest of the project — one accent, concentric radii,
+   transform/opacity motion only, borders for structure and shadow for lift.
+   ========================================================================== */
+
+body.sitebody { padding-top: 62px; }
+
+.wrap { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- navigation --------------------------------------------------- */
+
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  background: rgba(11,37,66,.72);
+  backdrop-filter: saturate(150%) blur(14px);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms var(--ease), background-color 200ms var(--ease);
+}
+.topnav.is-stuck {
+  background: rgba(11,37,66,.9);
+  border-bottom-color: rgba(250,250,247,.12);
+}
+.topnav__in {
+  max-width: var(--shell); margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 62px; display: flex; align-items: center; gap: 20px;
+}
+.topnav__mark {
+  display: inline-flex; align-items: center; gap: 9px;
+  text-decoration: none; color: var(--tape); margin-right: auto;
+}
+.topnav__mark i {
+  width: 17px; height: 17px; border-radius: 50%; background: var(--ball);
+  box-shadow: inset -4px -4px 0 -2px var(--court-deep);
+}
+.topnav__mark span {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 24px; font-weight: 700;
+}
+.topnav__links { display: flex; align-items: center; gap: 4px; }
+.topnav__link {
+  font-size: 14px; color: rgba(250,250,247,.72); text-decoration: none;
+  padding: 9px 12px; border-radius: 999px; min-height: 44px;
+  display: inline-flex; align-items: center;
+  transition: color var(--fast) ease-out, background-color var(--fast) ease-out;
+}
+@media (hover: hover) { .topnav__link:hover { color: var(--tape); background: rgba(250,250,247,.08); } }
+@media (max-width: 700px) { .topnav__link--hide { display: none; } }
+
+.cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 14.5px; font-weight: 600; text-decoration: none;
+  padding: 12px 20px; min-height: 44px;
+  border-radius: 999px;
+  background: var(--ball); color: var(--court-deep);
+  transition-property: transform, background-color, opacity;
+  transition-duration: var(--fast); transition-timing-function: ease-out;
+}
+.cta:active { transform: scale(0.97); }
+@media (hover: hover) { .cta:hover { background: #F5CC5E; } }
+
+.cta--ghost {
+  background: transparent; color: var(--tape);
+  border: 1.5px solid rgba(250,250,247,.28);
+}
+@media (hover: hover) { .cta--ghost:hover { background: rgba(250,250,247,.08); border-color: rgba(250,250,247,.5); } }
+
+.cta--lg { font-size: 16px; padding: 15px 26px; min-height: 52px; }
+
+/* ---------- hero --------------------------------------------------------- */
+
+.hero {
+  max-width: var(--shell); margin: 0 auto;
+  padding: 74px var(--gutter) 88px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 64px; align-items: center;
+}
+
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 500; color: var(--ball);
+  border: 1px solid rgba(239,191,67,.32);
+  border-radius: 999px; padding: 6px 13px; margin: 0 0 22px;
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: clamp(42px, 5.4vw, 68px); line-height: 1.0;
+  margin: 0 0 20px; max-width: 15ch; text-wrap: balance;
+}
+.hero__sub {
+  margin: 0 0 30px; font-size: 17px; line-height: 1.6;
+  color: rgba(250,250,247,.75); max-width: 50ch; text-wrap: pretty;
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: 11px; align-items: center; }
+.hero__note { margin: 18px 0 0; font-size: 13.5px; color: rgba(250,250,247,.5); }
+
+.hero__device { justify-self: end; }
+
+/* ---------- section furniture -------------------------------------------- */
+
+.band { padding: 78px 0; border-top: 1px solid rgba(250,250,247,.1); }
+.band--quiet { background: rgba(250,250,247,.022); }
+
+.band__head { max-width: 620px; margin: 0 0 44px; }
+.band__kicker {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ball); margin: 0 0 12px;
+}
+.band__head h2 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.06;
+  margin: 0 0 12px; text-wrap: balance;
+}
+.band__head p {
+  margin: 0; font-size: 16px; line-height: 1.6;
+  color: rgba(250,250,247,.7); text-wrap: pretty;
+}
+
+/* ---------- the barrier: problem / answer pairs -------------------------- */
+
+.pairs { display: grid; gap: 0; }
+.pair {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px; padding: 26px 0;
+  border-top: 1px solid rgba(250,250,247,.1);
+  align-items: baseline;
+}
+.pair:last-child { border-bottom: 1px solid rgba(250,250,247,.1); }
+.pair__q {
+  margin: 0; font-size: 17px; font-weight: 500; color: var(--tape);
+  text-wrap: pretty;
+}
+.pair__a {
+  margin: 0; font-size: 15.5px; line-height: 1.6;
+  color: rgba(250,250,247,.68); text-wrap: pretty;
+}
+@media (max-width: 760px) { .pair { grid-template-columns: 1fr; gap: 8px; } }
+
+/* ---------- steps -------------------------------------------------------- */
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 34px; }
+.step-card { display: grid; gap: 10px; align-content: start; }
+.step-card__n {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 15px; color: var(--court-deep);
+  background: var(--ball); width: 30px; height: 30px;
+  border-radius: 50%; display: grid; place-items: center; font-weight: 700;
+}
+.step-card h3 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: 23px; margin: 4px 0 0; line-height: 1.15;
+}
+.step-card p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(250,250,247,.68); }
+
+/* ---------- feature cards ------------------------------------------------ */
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.card {
+  border: 1px solid rgba(250,250,247,.14);
+  border-radius: 16px; padding: 24px 22px;
+  display: grid; gap: 9px; align-content: start;
+  transition: border-color var(--fast) ease-out, background-color var(--fast) ease-out;
+}
+@media (hover: hover) { .card:hover { border-color: rgba(250,250,247,.3); background: rgba(250,250,247,.03); } }
+.card h3 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: 21px; margin: 0; line-height: 1.2;
+}
+.card p { margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(250,250,247,.68); }
+.card__tag {
+  font-size: 12px; font-weight: 600; color: var(--ball);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- host split --------------------------------------------------- */
+
+.split {
+  display: grid; grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 64px; align-items: center;
+}
+.split__device { justify-self: end; }
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; gap: 40px; }
+  .split__device { justify-self: start; }
+}
+
+.ticks { margin: 24px 0 30px; padding: 0; list-style: none; display: grid; gap: 13px; }
+.ticks li {
+  display: grid; grid-template-columns: 20px 1fr; gap: 12px;
+  font-size: 15.5px; line-height: 1.55; color: rgba(250,250,247,.74);
+}
+.ticks svg { width: 18px; height: 18px; color: var(--ball); margin-top: 3px; }
+
+/* ---------- closing ------------------------------------------------------ */
+
+.closer { padding: 92px 0 100px; text-align: center; }
+.closer h2 {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-weight: 600; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.04;
+  margin: 0 auto 16px; max-width: 18ch; text-wrap: balance;
+}
+.closer p {
+  margin: 0 auto 30px; max-width: 46ch;
+  font-size: 16.5px; line-height: 1.6; color: rgba(250,250,247,.7);
+}
+.closer__actions { display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; }
+
+/* ---------- footer ------------------------------------------------------- */
+
+.sitefoot {
+  border-top: 1px solid rgba(250,250,247,.12);
+  padding: 34px 0 64px;
+}
+.sitefoot__in {
+  max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter);
+  display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: center;
+  font-size: 13.5px; color: rgba(250,250,247,.5);
+}
+.sitefoot a {
+  color: rgba(250,250,247,.68); text-decoration: none;
+  padding: 8px 0; min-height: 44px; display: inline-flex; align-items: center;
+  transition: color var(--fast) ease-out;
+}
+@media (hover: hover) { .sitefoot a:hover { color: var(--tape); } }
+.sitefoot__sep { margin-left: auto; }
+
+/* ---------- the phone on the site is decoration, not a control ----------- */
+
+.showcase { width: 360px; max-width: 100%; }
+.showcase .app { padding: 4px 18px 20px; }
+
+/* ---------- responsive --------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 46px; padding-top: 52px; padding-bottom: 66px; }
+  .hero__device { justify-self: start; }
+  .band { padding: 60px 0; }
+}
+@media (max-width: 420px) {
+  .showcase, .hero__device .phone, .split__device .phone { width: 100%; }
+}

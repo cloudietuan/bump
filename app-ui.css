@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Bump — standalone app UI.
+
+   Loads after styles.css and reuses its tokens and component styles. The job
+   here is only the shell: on a phone the app fills the viewport edge to edge,
+   on a desktop it sits in a centred column so the layout still reads as an app
+   rather than stretching into a website.
+   ========================================================================== */
+
+html, body { height: 100%; }
+
+body.appbody {
+  margin: 0;
+  background: var(--court-deep);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  /* no decorative grid here — an app surface should be quiet */
+  background-image: none;
+  overscroll-behavior-y: none;
+}
+
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--tape);
+}
+
+/* ---------- app bar ------------------------------------------------------ */
+
+.appbar {
+  position: sticky; top: 0; z-index: 20;
+  display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
+  gap: 4px;
+  padding: max(10px, env(safe-area-inset-top)) 10px 10px;
+  background: rgba(250,250,247,.86);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--hair);
+}
+
+.appbar__title {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 20px; font-weight: 600; text-align: center;
+  margin: 0; color: var(--ink);
+  line-height: 1.1;
+}
+
+.appbar__btn {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--court); font-size: 20px; line-height: 1;
+  transition: background-color var(--fast) ease-out, opacity var(--fast) ease-out;
+}
+.appbar__btn[hidden] { display: none; }
+@media (hover: hover) { .appbar__btn:hover { background: rgba(18,59,99,.07); } }
+.appbar__btn:active { transform: scale(0.94); }
+
+/* the wordmark stands in for the title on the two root screens */
+.appbar__mark { display: inline-flex; align-items: center; gap: 7px; justify-content: center; }
+.appbar__mark i {
+  width: 15px; height: 15px; border-radius: 50%; background: var(--ball);
+  box-shadow: inset -3px -3px 0 -2px var(--court-deep);
+}
+.appbar__mark span {
+  font-family: 'Barlow Condensed', Inter, sans-serif;
+  font-size: 21px; font-weight: 700; color: var(--ink);
+}
+
+/* ---------- scrolling content ------------------------------------------- */
+
+.screens {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* the screens themselves come from styles.css; only the padding changes here
+   because there is no phone bezel to sit inside any more */
+.shell .app { padding: 14px 20px 28px; }
+
+/* ---------- bottom navigation ------------------------------------------- */
+
+.navbar {
+  position: sticky; bottom: 0; z-index: 20;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  background: rgba(250,250,247,.94);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-top: 1px solid var(--hair);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.navbtn {
+  display: grid; justify-items: center; gap: 3px;
+  padding: 9px 0 8px; min-height: 56px;
+  font-size: 11px; font-weight: 500; color: var(--mute);
+  text-align: center;
+  transition: color var(--fast) ease-out;
+}
+.navbtn__icon {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+}
+.navbtn__icon svg { width: 21px; height: 21px; display: block; }
+.navbtn.is-on { color: var(--court); font-weight: 600; }
+@media (hover: hover) { .navbtn:hover:not(.is-on) { color: var(--ink); } }
+.navbtn:active { transform: scale(0.94); }
+
+/* ---------- desktop: keep it an app, not a stretched web page ------------ */
+
+@media (min-width: 720px) {
+  body.appbody {
+    display: grid; place-items: center;
+    padding: 26px 20px;
+    /* the court grid returns only as page dressing behind the app */
+    background-image:
+      linear-gradient(transparent 0 calc(100% - 1px), rgba(250,250,247,.028) 0),
+      linear-gradient(90deg, transparent 0 calc(100% - 1px), rgba(250,250,247,.028) 0);
+    background-size: 100% 300px, 300px 100%;
+  }
+  .shell {
+    width: 420px;
+    min-height: 0;
+    height: min(860px, calc(100dvh - 52px));
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 22px 54px rgba(0,0,0,.32);
+  }
+  .appbar { border-radius: 0; }
+}
+
+/* a quiet way back to the marketing site, desktop only */
+.exit {
+  position: fixed; left: 20px; top: 20px; z-index: 30;
+  display: none; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 500;
+  color: rgba(250,250,247,.62); text-decoration: none;
+  padding: 8px 12px; border-radius: 999px;
+  border: 1px solid rgba(250,250,247,.18);
+  transition: color var(--fast) ease-out, border-color var(--fast) ease-out;
+}
+@media (min-width: 980px) { .exit { display: inline-flex; } }
+@media (hover: hover) { .exit:hover { color: var(--tape); border-color: rgba(250,250,247,.45); } }
+
+/* ---------- motion ------------------------------------------------------- */
+
+.shell .app.enters > * { animation: rise var(--enter) var(--ease) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shell .app.enters > * { animation: none !important; }
+}
