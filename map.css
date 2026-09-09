@@ -23,10 +23,15 @@
 
 .leaflet-container {
   width: 100%; height: 100%;
-  background: #0F2942;
+  background: #E9E7E0;
   font: inherit;
   outline: none;
 }
+
+/* OSM's own tiles are colourful; muting them lets the yellow pins stay the only
+   saturated thing on the map, which is the same rule the rest of the site
+   follows. The filter is on the tiles alone, so markers keep their colour. */
+.leaflet-tile { filter: grayscale(0.82) contrast(0.94) brightness(1.05); }
 
 /* ---------- fallback shown until (or unless) a map loads ------------------ */
 

@@ -63,8 +63,11 @@
 
   window.BumpMap = { venues: VENUES, maps: {} };
 
-  var TILES = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-  var ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  /* OpenStreetMap's own tiles: genuinely keyless. CARTO's basemaps look better
+     but now stamp "API KEY REQUIRED" across every tile, which is worse than a
+     plainer map. These are muted to the palette with a CSS filter instead. */
+  var TILES = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var ATTRIB = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
   function ready() { return typeof window.L !== 'undefined'; }
 
@@ -92,7 +95,7 @@
       scrollWheelZoom: false,      // never hijack the page scroll
       attributionControl: true
     });
-    L.tileLayer(TILES, { attribution: ATTRIB, maxZoom: 19, subdomains: 'abcd' }).addTo(map);
+    L.tileLayer(TILES, { attribution: ATTRIB, maxZoom: 19 }).addTo(map);
     el.parentNode.classList.add('is-live');
     return map;
   }
