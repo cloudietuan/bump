@@ -24,6 +24,7 @@ unsolved part is the on-ramp, and that is what this prototype is about.
 | Listings hide whether you'd be the worst player there | Every game card shows how many attendees marked themselves new |
 | Walking into an unfamiliar gym alone is the real fear | Each game shows a minute-by-minute schedule of what happens when you arrive |
 | Getting picked last | Hosts assign teams, and the interface says so up front |
+| "1720 Eighth St" is not somewhere a newcomer can picture | Games sit on a map, and hosts place the pin themselves |
 | Hosts have no reason to be welcoming | "Welcome first-timers" is a toggle with a stated commitment attached |
 | "We need an oppo" assumes you know the positions | Every position is decoded, including which ones are worth trying first |
 
@@ -73,7 +74,11 @@ screen, so the screenshots and the working app can never drift apart.
 
 ## Running it
 
-No build step, no dependencies.
+No build step. One dependency: Leaflet, loaded from a CDN for the maps —
+everything else is hand-written. Maps use CARTO basemaps over OpenStreetMap
+data; both are keyless, and so are the Directions links, which hand off to the
+viewer's own maps app. If Leaflet or the tiles fail to load, each map falls
+back to the venue name, its address, and the directions link.
 
 ```
 git clone https://github.com/cloudietuan/bump.git
@@ -129,7 +134,10 @@ gen.py         regenerates positions.html from both
 
 app.html       the app
 app-ui.css     app shell: app bar, screens, bottom nav
-app-ui.js      routing, screen state, controls
+app-ui.js      routing, screen state, controls, map wiring
+map.css        map surfaces, pins, popups, fallbacks
+map.js         Leaflet setup: overview, venue, pin picker
+venues.py      venue names, addresses and coordinates
 
 prototype.html the original case-study page
 app.js         prototype routing and gallery cloning
