@@ -379,7 +379,9 @@ body.sitebody { padding-top: 62px; }
 
 /* ---------- ball watermark behind the hero ------------------------------- */
 
-.hero { position: relative; }
+/* the mark deliberately hangs off the right edge, so the hero has to clip it —
+   without this it widens the document and the whole page scrolls sideways */
+.hero { position: relative; overflow: hidden; }
 .hero__mark {
   position: absolute; right: -120px; top: -90px;
   width: 620px; height: 620px;

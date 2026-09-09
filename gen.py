@@ -85,8 +85,8 @@ PAGE = '''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
-<link rel="stylesheet" href="site.css?v=9">\n<link rel="stylesheet" href="intro.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
+<link rel="stylesheet" href="site.css?v=10">\n<link rel="stylesheet" href="intro.css?v=10">
 </head>
 <body class="sitebody intro-hold">
 
@@ -173,7 +173,7 @@ PAGE = '''<!DOCTYPE html>
   </div>
 </footer>
 
-<script src="site.js?v=9"></script>
+<script src="site.js?v=10"></script>
 </body>
 </html>
 ''' % dict(nav=NAV, intro=INTRO, court=court(), cards=cards())
